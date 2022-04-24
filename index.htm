@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Arduino Ajax I/O</title>
+		<script>
+			const values = [true, false];
+			var leds = [
+				true,
+				false,
+				true,
+				false,
+				true,
+				false,
+				true,
+				false,
+				true,
+				false,
+				true,
+				false,
+			];
+			function GetArduinoIO() {
+				let data = { RelayOnOFF: leds, SetAll: 0 };
+
+				fetch('/post/data', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify(data),
+				}).then((res) => {
+					console.log('Request complete! response:', res);
+				});
+				setTimeout('GetArduinoIO()', 10000);
+			}
+		</script>
+	</head>
+	<body onload="GetArduinoIO()">
+		<div class="led-app">
+			<div class="led">led 1</div>
+			<div class="led">led 2</div>
+			<div class="led">led 3</div>
+			<div class="led">led 4</div>
+			<div class="led">led 5</div>
+			<div class="led">led 6</div>
+			<div class="led">led 7</div>
+			<div class="led">led 8</div>
+			<div class="led">led 9</div>
+			<div class="led">led 10</div>
+			<div class="led">led 11</div>
+			<div class="led">led 12</div>
+		</div>
+	</body>
+</html>
